@@ -1,6 +1,6 @@
 # 🍽️ MESS ORACLE
 
-> A daily mess food verdict.
+> Daily mess food verdict.
 
 ## Folder Structure
 
@@ -20,18 +20,18 @@ Just open `index.html` in any browser. No build step, no dependencies, no server
 
 ## Features
 
-- **Day + Meal selector** — auto-detects today's day on load
-- **Preference engine** — veg/non-veg, spice level, craving type, fitness goal
-- **Smart scoring** — every menu item scored 0–100 based on preferences
-- **Eat / Maybe / Skip** — clear 3-tier verdict per item
-- **Macro breakdown** — calories, protein, carbs, fat with visual bars
-- **Goal-aware macros** — compared against targets for Bulk / Maintenance / Cut
-- **Outside food suggestion** — a specific dish + place + price if the mess is underwhelming
-- **Pro tip** — random goal-specific hostel wisdom
+- **Day + Meal selector**: auto-detects today's day on load
+- **Preference engine**: veg/non-veg, spice level, craving type, fitness goal
+- **Smart scoring**: every menu item scored 0–100 based on preferences
+- **Eat / Maybe / Skip**: clear 3-tier verdict per item
+- **Macro breakdown**: calories, protein, carbs, fat with visual bars
+- **Goal-aware macros**: compared against targets for Bulk / Maintenance / Cut
+- **Outside food suggestion**: a specific dish + place + price if the mess is underwhelming
+- **Pro tip**: random goal-specific hostel wisdom
 
 ## Tech
 
-Vanilla HTML/CSS/JS — no frameworks, no npm, no build tools.
+Vanilla HTML/CSS/JS, no frameworks, no npm, no build tools.
 Single responsibility: menu.js = data, logic.js = brain, app.js = UI.
 
 ## Custom Menu Format
