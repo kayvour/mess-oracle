@@ -1,6 +1,6 @@
 # 🍽️ MESS ORACLE
 
-> Your daily mess food verdict — preference-aware, macro-smart.
+> A daily mess food verdict.
 
 ## Folder Structure
 
