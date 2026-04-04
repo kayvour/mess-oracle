@@ -33,3 +33,26 @@ Just open `index.html` in any browser. No build step, no dependencies, no server
 
 Vanilla HTML/CSS/JS — no frameworks, no npm, no build tools.
 Single responsibility: menu.js = data, logic.js = brain, app.js = UI.
+
+## Custom Menu Format
+
+To use your own mess menu, replace `menu.js` with the same structure:
+MENU = {
+monday: {
+breakfast: [{ name, serving, tags, protein, carbs, fat, cal }],
+lunch: [...],
+snacks: [...],
+dinner: [...]
+},
+...
+}
+
+
+## Future Improvements
+
+- Dynamic menu switching (load different menu files)
+- Upload custom menu files directly
+- Menu validation to prevent broken formats
+- Advanced macro insights (weekly averages, goal optimization)
+- Smart macro estimation for incomplete menus
+- Share/import menu configurations
