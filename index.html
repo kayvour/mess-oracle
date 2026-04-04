@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mess Oracle 🍽️</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <div class="grain"></div>
+
+  <header>
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">⟡</span>
+        <span class="logo-text">MESS ORACLE</span>
+      </div>
+      <div class="tagline">Your daily mess food verdict</div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- Step 1: Day Selector -->
+    <section class="step active" id="step-day">
+      <div class="step-label">01 — WHEN ARE YOU EATING?</div>
+      <h2>Pick the day</h2>
+      <div class="day-grid" id="day-grid"></div>
+    </section>
+
+    <!-- Step 2: Meal Selector -->
+    <section class="step" id="step-meal">
+      <div class="step-label">02 — WHICH MEAL?</div>
+      <h2>Pick the meal</h2>
+      <div class="meal-grid" id="meal-grid"></div>
+      <button class="back-btn" onclick="goBack('step-day')">← back</button>
+    </section>
+
+    <!-- Step 3: Preferences -->
+    <section class="step" id="step-prefs">
+      <div class="step-label">03 — YOUR PREFERENCES</div>
+      <h2>Tell us about yourself</h2>
+
+      <div class="pref-card">
+        <div class="pref-title">Are you vegetarian?</div>
+        <div class="toggle-group">
+          <button class="toggle active" data-pref="veg" data-val="veg">🥦 Pure Veg</button>
+          <button class="toggle" data-pref="veg" data-val="both">🍗 Both Fine</button>
+        </div>
+      </div>
+
+      <div class="pref-card">
+        <div class="pref-title">Spice tolerance</div>
+        <div class="toggle-group">
+          <button class="toggle active" data-pref="spice" data-val="low">😌 Mild</button>
+          <button class="toggle" data-pref="spice" data-val="medium">🔥 Medium</button>
+          <button class="toggle" data-pref="spice" data-val="high">💀 Bring It</button>
+        </div>
+      </div>
+
+      <div class="pref-card">
+        <div class="pref-title">What are you craving?</div>
+        <div class="toggle-group wrap">
+          <button class="toggle active" data-pref="craving" data-val="any">🎲 Anything</button>
+          <button class="toggle" data-pref="craving" data-val="rice">🍚 Rice</button>
+          <button class="toggle" data-pref="craving" data-val="bread">🫓 Roti/Bread</button>
+          <button class="toggle" data-pref="craving" data-val="light">🥗 Light Meal</button>
+          <button class="toggle" data-pref="craving" data-val="protein">💪 Protein-heavy</button>
+        </div>
+      </div>
+
+      <div class="pref-card">
+        <div class="pref-title">Fitness goal today?</div>
+        <div class="toggle-group">
+          <button class="toggle active" data-pref="goal" data-val="maintenance">⚖️ Maintain</button>
+          <button class="toggle" data-pref="goal" data-val="bulk">📈 Bulk</button>
+          <button class="toggle" data-pref="goal" data-val="cut">📉 Cut</button>
+        </div>
+      </div>
+
+      <button class="cta-btn" id="judge-btn" onclick="judgeTheMess()">
+        <span>Give me the verdict</span>
+        <span class="arrow">→</span>
+      </button>
+      <button class="back-btn" onclick="goBack('step-meal')">← back</button>
+    </section>
+
+    <!-- Step 4: Verdict -->
+    <section class="step" id="step-verdict">
+      <div class="step-label">04 — THE VERDICT IS IN</div>
+
+      <div id="verdict-banner"></div>
+
+      <div id="items-breakdown"></div>
+
+      <div id="macros-section"></div>
+
+      <div id="outside-suggestion"></div>
+
+      <div id="pro-tip"></div>
+
+      <button class="cta-btn secondary" onclick="resetAll()">
+        <span>Judge another meal</span>
+        <span class="arrow">↺</span>
+      </button>
+    </section>
+
+  </main>
+
+  <script src="menu.js"></script>
+  <script src="logic.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
