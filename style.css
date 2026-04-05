@@ -385,6 +385,44 @@ main { max-width: 680px; margin: 0 auto; padding: 0 24px 80px; }
 }
 
 /* ══════════════════════════════════════
+   COMBO / OPTIMAL PLATE
+══════════════════════════════════════ */
+.combo-group {
+  margin-bottom: 16px;
+  border: 1px solid rgba(93,229,166,0.2);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.combo-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(93,229,166,0.07);
+  padding: 8px 12px;
+  border-bottom: 1px solid rgba(93,229,166,0.15);
+}
+.combo-label {
+  font-family: 'Syne', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--green);
+}
+.combo-cal {
+  font-size: 11px;
+  color: var(--text2);
+}
+.combo-group .item-list {
+  padding: 0 12px;
+}
+.combo-empty {
+  font-size: 13px;
+  color: var(--red);
+  padding: 12px 0;
+}
+
+/* ══════════════════════════════════════
    FOOD GLOSSARY TOOLTIPS
    Hover/focus on underlined Tamil/regional
    words to see a plain-English description

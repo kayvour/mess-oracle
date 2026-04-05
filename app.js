@@ -144,7 +144,11 @@ function renderBanner(r) {
 function renderItems(r) {
   const html = `
     <div class="items-section">
-      <div class="section-title">what to eat from today's menu</div>
+      <div class="section-title">your optimal plate</div>
+      ${renderCombo(r.comboItems)}
+    </div>
+    <div class="items-section">
+      <div class="section-title">all available options</div>
       ${renderItemGroup("Eat this 🟢", r.eatItems, "eat")}
       ${renderItemGroup("Maybe 🟡", r.maybeItems, "maybe")}
       ${renderItemGroup("Skip 🔴", r.skipItems, "skip")}
@@ -153,12 +157,36 @@ function renderItems(r) {
   document.getElementById("items-breakdown").innerHTML = html;
 }
 
+function renderCombo(items) {
+  if (!items.length) return "<div class=\"combo-empty\">Nothing worth eating today. Go outside.</div>";
+  return `
+    <div class="combo-group">
+      <div class="combo-header">
+        <span class="combo-label">Build your plate</span>
+        <span class="combo-cal">${items.reduce((s,i) => s + i.cal, 0)} kcal · ${items.reduce((s,i) => s + i.protein, 0)}g protein</span>
+      </div>
+      <div class="item-list">
+        ${items.map(item => `
+          <div class="item-row">
+            <div class="item-main">
+              <span class="item-name">${glossifyName(item.name)}</span>
+              ${item.serving ? `<span class="item-serving">${item.serving}</span>` : ""}
+              ${item.exclusiveAlternative ? `<span class="exclusive-note">picked over: ${glossifyName(item.exclusiveAlternative.name)}</span>` : ""}
+            </div>
+            <span class="item-macro-mini">${item.protein}g P · ${item.carbs}g C · ${item.cal} kcal</span>
+          </div>
+        `).join("")}
+      </div>
+    </div>
+  `;
+}
+
 function glossifyName(name) {
   if (typeof FOOD_GLOSSARY === "undefined") return name;
   let result = name;
   const sortedKeys = Object.keys(FOOD_GLOSSARY).sort((a, b) => b.length - a.length);
   for (const key of sortedKeys) {
-    const escapedKey = key.replace(/[.*+?^${}()|[\]]/g, '\\$&');
+    const escapedKey = key.replace(/[.*+?^${}()|[\\]\\]/g, '\\$&');
     const regex = new RegExp('(?<![>])' + escapedKey, 'gi');
     if (regex.test(result)) {
       const desc = FOOD_GLOSSARY[key].replace(/"/g, '&quot;');
@@ -178,8 +206,7 @@ function renderItemGroup(label, items, cls) {
           <div class="item-row">
             <div class="item-main">
               <span class="item-name">${glossifyName(item.name)}</span>
-              ${item.serving ? `<span class="item-serving">${item.serving}</span>` : ''}
-              ${item.exclusiveAlternative ? `<span class="exclusive-note">Oracle picked this over: ${glossifyName(item.exclusiveAlternative.name)}</span>` : ''}
+              ${item.serving ? `<span class="item-serving">${item.serving}</span>` : ""}
             </div>
             <span class="item-macro-mini">${item.protein}g P · ${item.carbs}g C · ${item.cal} kcal</span>
           </div>
