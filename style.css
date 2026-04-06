@@ -610,6 +610,57 @@ main { max-width: 680px; margin: 0 auto; padding: 0 24px 80px; }
 .tip-text  { font-size: 14px; color: var(--text2); line-height: 1.6; }
 
 /* ══════════════════════════════════════
+   SKIP REASON
+══════════════════════════════════════ */
+.skip-reason {
+  font-size: 11px;
+  color: var(--red);
+  opacity: 0.75;
+  font-style: italic;
+}
+
+/* ══════════════════════════════════════
+   AUTO-INCLUDE ITEMS (Tea/Coffee/Milk)
+══════════════════════════════════════ */
+.item-row-auto { opacity: 0.5; }
+.item-name-muted { color: var(--text2); }
+.item-auto-label {
+  font-size: 10px;
+  color: var(--text3);
+  font-style: italic;
+  white-space: nowrap;
+}
+
+/* ══════════════════════════════════════
+   TWEAK PREFERENCES BUTTON
+   (shown inside the eat-in/eat-out card)
+══════════════════════════════════════ */
+.tweak-btn {
+  display: inline-block;
+  margin-top: 12px;
+  background: none;
+  border: 1px solid var(--border2);
+  border-radius: var(--radius);
+  color: var(--text3);
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  padding: 6px 12px;
+  transition: all 0.15s ease;
+}
+.tweak-btn:hover { color: var(--text2); border-color: var(--text3); }
+
+/* ══════════════════════════════════════
+   TOOLTIP — TAP-TO-OPEN ON MOBILE
+   .tip-open forces the tooltip visible
+   regardless of hover state
+══════════════════════════════════════ */
+.food-tooltip.tip-open::after,
+.food-tooltip.tip-open::before {
+  opacity: 1;
+}
+
+/* ══════════════════════════════════════
    RESPONSIVE
 ══════════════════════════════════════ */
 @media (max-width: 500px) {
