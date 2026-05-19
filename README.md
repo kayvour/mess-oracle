@@ -2,6 +2,8 @@
 
 > Daily mess food verdict.
 
+Built Using Claude Sonnet 4.6. Supervised, Tested and Reviewed.
+
 ## Folder Structure
 
 ```
