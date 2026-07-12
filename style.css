@@ -156,6 +156,38 @@ main { max-width: 680px; margin: 0 auto; padding: 0 24px 80px; }
 .day-full  { font-size: 9px; opacity: 0.5; display: none; }
 
 /* ══════════════════════════════════════
+   MESS TYPE GRID
+══════════════════════════════════════ */
+.messtype-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.messtype-btn {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  color: var(--text2);
+  cursor: pointer;
+  padding: 20px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  transition: all 0.18s ease;
+  text-align: left;
+}
+.messtype-btn:hover  { border-color: var(--border2); color: var(--text); }
+.messtype-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(232,217,106,0.05); }
+.messtype-icon  { font-size: 20px; line-height: 1; }
+.messtype-label { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.04em; }
+.messtype-sub   { font-size: 10px; opacity: 0.55; line-height: 1.3; }
+
+@media (max-width: 480px) {
+  .messtype-grid { grid-template-columns: 1fr; }
+}
+
+/* ══════════════════════════════════════
    MEAL GRID
 ══════════════════════════════════════ */
 .meal-grid {

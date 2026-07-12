@@ -267,9 +267,9 @@ function getProTip(day, meal, prefs) {
 }
 
 // ── MAIN VERDICT GENERATOR ───────────────────────
-function generateVerdict(day, meal, prefs) {
+function generateVerdict(messType, week, day, meal, prefs) {
   try {
-    const rawItems = MENU[day]?.[meal] ?? [];
+    const rawItems = MENU[messType]?.[week]?.[day]?.[meal] ?? [];
     if (!rawItems.length) return { empty: true, reason: "No menu data for this meal." };
 
     // 1. Resolve exclusive groups
@@ -324,7 +324,7 @@ function generateVerdict(day, meal, prefs) {
     const tip = getProTip(day, meal, prefs);
 
     return {
-      day, meal, prefs, avgScore,
+      messType, week, day, meal, prefs, avgScore,
       overallVerdict,
       eatItems, maybeItems, skipItems,
       condimentItems, autoItems,

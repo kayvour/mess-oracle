@@ -28,28 +28,36 @@
 
   <main>
 
-    <!-- Step 1: Day Selector -->
-    <section class="step active" id="step-day">
-      <div class="step-label">01 — WHEN ARE YOU EATING?</div>
-      <h2>Pick the day</h2>
-      <div class="day-grid" id="day-grid"></div>
+    <!-- Step 1: Mess Type Selector -->
+    <section class="step active" id="step-messtype">
+      <div class="step-label">01 — WHICH MESS?</div>
+      <h2>Pick the counter</h2>
+      <div class="messtype-grid" id="messtype-grid"></div>
     </section>
 
-    <!-- Step 2: Meal Selector -->
+    <!-- Step 2: Day Selector -->
+    <section class="step" id="step-day">
+      <div class="step-label">02 — WHEN ARE YOU EATING?</div>
+      <h2>Pick the day</h2>
+      <div class="day-grid" id="day-grid"></div>
+      <button class="back-btn" onclick="goBack('step-messtype')">← back</button>
+    </section>
+
+    <!-- Step 3: Meal Selector -->
     <section class="step" id="step-meal">
-      <div class="step-label">02 — WHICH MEAL?</div>
+      <div class="step-label">03 — WHICH MEAL?</div>
       <h2>Pick the meal</h2>
       <div class="meal-grid" id="meal-grid"></div>
       <button class="back-btn" onclick="goBack('step-day')">← back</button>
     </section>
 
-    <!-- Step 3: Preferences -->
+    <!-- Step 4: Preferences -->
     <section class="step" id="step-prefs">
-      <div class="step-label">03 — YOUR PREFERENCES</div>
+      <div class="step-label">04 — YOUR PREFERENCES</div>
       <h2>Tell us about yourself</h2>
 
-      <div class="pref-card">
-        <div class="pref-title">Are you vegetarian?</div>
+      <div class="pref-card" id="veg-pref-card">
+        <div class="pref-title">Skip the egg/meat items?</div>
         <div class="toggle-group">
           <button class="toggle active" data-pref="veg" data-val="veg">🥦 Pure Veg</button>
           <button class="toggle" data-pref="veg" data-val="both">🍗 Both Fine</button>
@@ -92,9 +100,9 @@
       <button class="back-btn" onclick="goBack('step-meal')">← back</button>
     </section>
 
-    <!-- Step 4: Verdict -->
+    <!-- Step 5: Verdict -->
     <section class="step" id="step-verdict">
-      <div class="step-label">04 — THE VERDICT IS IN</div>
+      <div class="step-label">05 — THE VERDICT IS IN</div>
 
       <div id="verdict-banner"></div>
 

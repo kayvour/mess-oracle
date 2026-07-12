@@ -4,6 +4,7 @@
 const PREF_STORAGE_KEY = "mess-oracle-prefs";
 
 const state = {
+  messType: null,
   day:  null,
   meal: null,
   prefs: loadPrefs(),
@@ -22,6 +23,11 @@ function savePrefs() {
 }
 
 // ── CONSTANTS ────────────────────────────────────
+const MESS_TYPES = [
+  { id: "veg",     label: "Veg Mess",      icon: "🥦", sub: "Vegetarian counter" },
+  { id: "nonveg",  label: "Non-Veg Mess",  icon: "🍗", sub: "Egg & meat included" },
+  { id: "special", label: "Special Mess",  icon: "✨", sub: "Premium, wider spread" },
+];
 const DAYS  = ["monday","tuesday","wednesday","thursday","friday","saturday","sunday"];
 const MEALS = [
   { id: "breakfast", label: "Breakfast", icon: "☀" },
@@ -32,17 +38,41 @@ const MEALS = [
 
 // ── INIT ─────────────────────────────────────────
 function init() {
+  renderMessTypeGrid();
   renderDayGrid();
   renderMealGrid();
   setupToggleListeners();
   applyPrefsToUI();
-  autoSelectCurrentDay();
   setupTooltips();
 }
 
 function autoSelectCurrentDay() {
   const today = new Date().toLocaleDateString("en-US", { weekday: "long" }).toLowerCase();
   if (DAYS.includes(today)) selectDay(today);
+}
+
+// ── MESS TYPE GRID ───────────────────────────────
+function renderMessTypeGrid() {
+  const grid = document.getElementById("messtype-grid");
+  grid.innerHTML = MESS_TYPES.map(t => `
+    <button class="messtype-btn" data-messtype="${t.id}" onclick="selectMessType('${t.id}')">
+      <span class="messtype-icon">${t.icon}</span>
+      <span class="messtype-label">${t.label}</span>
+      <span class="messtype-sub">${t.sub}</span>
+    </button>
+  `).join("");
+}
+
+function selectMessType(messType) {
+  state.messType = messType;
+  document.querySelectorAll(".messtype-btn").forEach(b =>
+    b.classList.toggle("active", b.dataset.messtype === messType)
+  );
+  // The "skip egg/meat" toggle is only meaningful on mixed counters —
+  // the pure veg counter has nothing to filter.
+  const vegCard = document.getElementById("veg-pref-card");
+  if (vegCard) vegCard.style.display = messType === "veg" ? "none" : "";
+  setTimeout(() => { autoSelectCurrentDay(); showStep("step-day"); }, 200);
 }
 
 // ── NAVIGATION ───────────────────────────────────
@@ -136,8 +166,9 @@ function setupTooltips() {
 
 // ── VERDICT ──────────────────────────────────────
 function judgeTheMess() {
-  if (!state.day || !state.meal) return;
-  const result = generateVerdict(state.day, state.meal, state.prefs);
+  if (!state.messType || !state.day || !state.meal) return;
+  const week = getActiveMenuWeek(new Date());
+  const result = generateVerdict(state.messType, week, state.day, state.meal, state.prefs);
   if (!result) return;
 
   if (result.empty) {
@@ -183,12 +214,13 @@ function renderBanner(r) {
   const v = r.overallVerdict;
   const mealLabel = MEALS.find(m => m.id === r.meal)?.label || r.meal;
   const dayLabel  = r.day.charAt(0).toUpperCase() + r.day.slice(1);
+  const messLabel = MESS_TYPES.find(t => t.id === r.messType)?.label || r.messType;
   document.getElementById("verdict-banner").innerHTML = `
     <div class="verdict-banner verdict-${v.color}">
       <div class="verdict-icon">${v.emoji}</div>
       <div class="verdict-text">
         <div class="verdict-main">${v.label}</div>
-        <div class="verdict-sub">${dayLabel} ${mealLabel} — ${r.avgScore}/100</div>
+        <div class="verdict-sub">${messLabel} · ${dayLabel} ${mealLabel} — ${r.avgScore}/100</div>
       </div>
       <div class="score-ring">
         <svg viewBox="0 0 44 44" class="score-svg">
@@ -403,10 +435,11 @@ function renderProTip(r) {
 
 // ── RESET ────────────────────────────────────────
 function resetAll() {
+  state.messType = null;
   state.day  = null;
   state.meal = null;
-  showStep("step-day");
-  document.querySelectorAll(".day-btn, .meal-btn").forEach(b => b.classList.remove("active"));
+  showStep("step-messtype");
+  document.querySelectorAll(".messtype-btn, .day-btn, .meal-btn").forEach(b => b.classList.remove("active"));
 }
 
 // Boot
