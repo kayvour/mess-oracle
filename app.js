@@ -24,9 +24,8 @@ function savePrefs() {
 
 // ── CONSTANTS ────────────────────────────────────
 const MESS_TYPES = [
-  { id: "veg",     label: "Veg Mess",      icon: "🥦", sub: "Vegetarian counter" },
-  { id: "nonveg",  label: "Non-Veg Mess",  icon: "🍗", sub: "Egg & meat included" },
-  { id: "special", label: "Special Mess",  icon: "✨", sub: "Premium, wider spread" },
+  { id: "a", label: "Mess A", icon: "🍗", sub: "Non-Veg Mess — Men's Hostel" },
+  { id: "b", label: "Mess B", icon: "🥦", sub: "LH Veg Mess" },
 ];
 const DAYS  = ["monday","tuesday","wednesday","thursday","friday","saturday","sunday"];
 const MEALS = [
@@ -43,12 +42,16 @@ function init() {
   renderMealGrid();
   setupToggleListeners();
   applyPrefsToUI();
+  markTodayInGrid();
   setupTooltips();
 }
 
-function autoSelectCurrentDay() {
+// Highlights today's tile in the day grid — doesn't select it or navigate.
+function markTodayInGrid() {
   const today = new Date().toLocaleDateString("en-US", { weekday: "long" }).toLowerCase();
-  if (DAYS.includes(today)) selectDay(today);
+  document.querySelectorAll(".day-btn").forEach(b =>
+    b.classList.toggle("is-today", b.dataset.day === today)
+  );
 }
 
 // ── MESS TYPE GRID ───────────────────────────────
@@ -71,8 +74,8 @@ function selectMessType(messType) {
   // The "skip egg/meat" toggle is only meaningful on mixed counters —
   // the pure veg counter has nothing to filter.
   const vegCard = document.getElementById("veg-pref-card");
-  if (vegCard) vegCard.style.display = messType === "veg" ? "none" : "";
-  setTimeout(() => { autoSelectCurrentDay(); showStep("step-day"); }, 200);
+  if (vegCard) vegCard.style.display = messType === "b" ? "none" : "";
+  setTimeout(() => { showStep("step-day"); }, 200);
 }
 
 // ── NAVIGATION ───────────────────────────────────
@@ -94,6 +97,7 @@ function renderDayGrid() {
     <button class="day-btn" data-day="${day}" onclick="selectDay('${day}')">
       <span class="day-short">${day.slice(0,3).toUpperCase()}</span>
       <span class="day-full">${day.charAt(0).toUpperCase() + day.slice(1)}</span>
+      <span class="today-badge">Today</span>
     </button>
   `).join("");
 }

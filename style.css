@@ -152,15 +152,26 @@ main { max-width: 680px; margin: 0 auto; padding: 0 24px 80px; }
 }
 .day-btn:hover  { border-color: var(--border2); color: var(--text); background: var(--bg3); }
 .day-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(232,217,106,0.06); }
+.day-btn.is-today { box-shadow: inset 0 0 0 1px var(--accent); }
+.day-btn.is-today.active { box-shadow: none; }
 .day-short { font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 700; }
 .day-full  { font-size: 9px; opacity: 0.5; display: none; }
+.today-badge {
+  display: none;
+  font-size: 8px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  opacity: 0.85;
+}
+.day-btn.is-today .today-badge { display: block; }
 
 /* ══════════════════════════════════════
    MESS TYPE GRID
 ══════════════════════════════════════ */
 .messtype-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 10px;
 }
 .messtype-btn {
